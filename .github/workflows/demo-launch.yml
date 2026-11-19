@@ -1,5 +1,7 @@
 name: PikaOikeus 7.0 demo launch
 on:
+  push:
+    branches: [feature/pikaoikeus-7-safety-foundation]
   workflow_dispatch:
 permissions:
   contents: read
