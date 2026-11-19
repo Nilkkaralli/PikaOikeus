@@ -1,0 +1,11 @@
+{
+  "name": "pikaoikeus-safety-tests",
+  "private": true,
+  "version": "7.0.0-dev",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
