@@ -9,7 +9,7 @@ const ctx = { document: { getElementById: () => ({ replaceChildren() {} }) }, wi
 vm.createContext(ctx);
 vm.runInContext(script.replace(/render\(\);\s*$/, ''),ctx);
 function evaluate(expression,entries=[],type='violence') {
-  ctx.entries=entries; ctx.type=type;
+  vm.runInContext('entries = '+JSON.stringify(entries)+'; type = '+JSON.stringify(type),ctx);
   return vm.runInContext(expression,ctx);
 }
 function answer(id,value){return {id,q:id,answer:value};}
