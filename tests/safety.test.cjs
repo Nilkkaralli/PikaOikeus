@@ -37,3 +37,14 @@ test('legal: unknown closeness does not pass as negative',()=>{
   const entries=[answer('minorform','Kyllä.'),answer('serious','Ei.'),answer('age','30'),answer('close','Ei tiedossa.'),answer('work','Ei.')];
   assert.match(evaluate('legal()',entries),/Syyteoikeus selvitettävä/);
 });
+
+test('legal: ambiguous negatives must not be treated as confirmed no',()=>{
+  for(const response of ['Ei tiedossa.','Ei vielä tiedossa.','Ei varma.']) {
+    const entries=[answer('minorform','Kyllä.'),answer('serious','Ei.'),answer('age','30'),answer('close',response),answer('work','Ei.')];
+    assert.match(evaluate('legal()',entries),/Syyteoikeus selvitettävä/,response);
+  }
+});
+test('legal: explicit close relationship triggers cautious public prosecution flag',()=>{
+  const entries=[answer('minorform','Kyllä.'),answer('serious','Ei.'),answer('age','30'),answer('close','Kyllä.'),answer('work','Ei.')];
+  assert.match(evaluate('legal()',entries),/Virallisen syytteen alainen alustavasti/);
+});
